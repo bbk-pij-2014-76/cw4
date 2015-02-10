@@ -5,7 +5,9 @@ public class MeetingImpl implements Meeting
 	private int id;
 	private Calendar date;
 	private Set<Contact> contactList;
-
+	/**
+	Constructor for the MeetingImpl
+	*/
 	public MeetingImpl(int id, Set<Contact> contacts, Calendar date)
 	{
 		this.id = id;
