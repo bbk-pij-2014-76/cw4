@@ -21,4 +21,11 @@ public class MeetingImplTest
 		meeting = new MeetingImpl(678, contactList, calendar);
 	}
 
+	@Test
+	public void testGetContacts()
+	{
+		Set<Contact> setOfContacts = meeting.getContacts();
+		assertTrue(setOfContacts.containsAll(contactList));
+	}
+
 }
