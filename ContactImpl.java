@@ -6,11 +6,11 @@ public class ContactImpl implements Contact
 	/**
 		constructor
 	*/
-	ContactImpl()
+	ContactImpl(int id, String name, String notes)
 	{
-		this.id = 0;
-		this.name="";
-		this.notes="";
+		this.id = id;
+		this.name=name;
+		this.notes=notes;
 	}
 
 	public String getNotes()
