@@ -5,18 +5,18 @@ import static org.junit.Assert.*;
 public class ContactImplTest
 {
 	private Contact person;
-	private static final int ID = 0;
-	private static final String NAME = "";
-	private static final String NOTES = "";
+	private static final int ID = 22;
+	private static final String NAME = "Syed";
+	private static final String NOTES = "Works hard";
 
 	@Before
 	public void buildUp()
 	{
-		person = new ContactImpl();
+		person = new ContactImpl(22, "Syed" , "Works hard");
 	}
 	@Test
-	public void getContactId()
+	public void testGetId()
 	{
-		assertEquals(ID, person.getId());
+		assertEquals(person.getId(),ID);
 	}
 }
