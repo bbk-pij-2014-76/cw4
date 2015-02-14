@@ -15,8 +15,8 @@ public class ContactImplTest
 		person = new ContactImpl(22, "Syed" , "Works hard");
 	}
 	@Test
-	public void testGetId()
+	public void testGetName()
 	{
-		assertEquals(person.getId(),ID);
+		assertEquals(person.getName(), "Syed");
 	}
 }
