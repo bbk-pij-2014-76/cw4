@@ -28,4 +28,12 @@ public class MeetingImplTest
 		assertTrue(setOfContacts.containsAll(contactList));
 	}
 
+	@Test
+	public void testGetDate ()
+	{
+		Calendar calendar = new GregorianCalendar(2014,05,03);
+		assertEquals(calendar, meeting.getDate());
+	}
+
+
 }
