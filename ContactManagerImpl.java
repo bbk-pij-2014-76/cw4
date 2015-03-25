@@ -12,6 +12,8 @@ import java.io.*;
 */
 public class  ContactManagerImpl
 {
+	private Set<Contact> contactList;
+	private int id;
 /**
 * Add a new meeting to be held in the future.
 *
@@ -143,7 +145,8 @@ void addMeetingNotes(int id, String text)
 */
 void addNewContact(String name, String notes)
 {
-
+	Contact newContact = new ContactImpl(id, name, notes);
+    contactList.add(newContact);
 }
 /**
 * Returns a list containing the contacts that correspond to the IDs.
