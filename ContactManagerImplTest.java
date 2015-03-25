@@ -60,5 +60,13 @@ public class ContactManagerImplTest
 		List<Meeting> finalMeetingList = contactManager.getFutureMeetingList(contact1);
 		assertEquals("List of meetings is invalid",meetingList, finalMeetingList);
 	}
+	@Test
+	public void testPastMeeting()
+	{
+		assertEquals(2, contactManager.getPastMeeting(2).getId());
+		assertEquals("Here are the past meeting notes", contactManager.getPastMeeting(2).getNotes());
+		assertNull(contactManager.getPastMeeting(9999));
+	}
+
 
 }

@@ -20,7 +20,7 @@ public class  ContactManagerImpl
 	public ContactManagerImpl()
 	{
 		contactsFile = new File("myFile.txt");
-		//date = new GregorianCalendar();
+		todayDate = Calendar.getInstance();
 	}
 
 	 public List<Meeting> getMeetingList()
@@ -51,7 +51,15 @@ int addFutureMeeting(Set<Contact> contacts, Calendar date)
 */
 PastMeeting getPastMeeting(int id)
 {
-	return null;
+	Meeting meeting = getMeeting(id);
+	if (meeting == null)
+		return null;
+	date = Calendar.getInstance();
+	if (!(meeting instanceof PastMeetingImpl))
+	{
+		meeting = (FutureMeeting)meeting;
+	}
+	return (PastMeeting)meeting;
 }
 /**
 * Returns the FUTURE meeting with the requested ID, or null if there is none.
