@@ -41,4 +41,24 @@ public class ContactManagerImplTest
 		int futureMeetingId = contactManager.addFutureMeeting(contactList, new GregorianCalendar(2015,3,11));
 		assertTrue(futureMeetingId == 1);
 	}
+	@Test
+	public void testFutureMeetingList()
+	{
+		Set<Contact> contactList1 = new LinkedHashSet<Contact>();
+		Set<Contact> contactList2 = new LinkedHashSet<Contact>();
+		contactList1.add(contact1);
+		contactList2.add(contact2);
+
+		contactManager.addFutureMeeting(contactList2, new GregorianCalendar(2016,6,1));
+		contactManager.addNewPastMeeting(contactList1, new GregorianCalendar(2013,7,1), "Meeting was unsuccessful");
+		contactManager.addNewPastMeeting(contactList2, new GregorianCalendar(2013,2,1), "Meeting was successful");
+
+		List<Meeting> meetingList = new ArrayList<Meeting>();
+		meetingList.add(contactManager.getMeetingList().get(6));
+		meetingList.add(contactManager.getMeetingList().get(1));
+
+		List<Meeting> finalMeetingList = contactManager.getFutureMeetingList(contact1);
+		assertEquals("List of meetings is invalid",meetingList, finalMeetingList);
+	}
+
 }
