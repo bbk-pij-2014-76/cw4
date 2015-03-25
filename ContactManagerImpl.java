@@ -14,10 +14,20 @@ public class  ContactManagerImpl
 {
 	private Set<Contact> contactList;
 	private int id;
+	private File contactsFile;
+	private Calendar date;
+	private List<Meeting> meetingList;
 	public ContactManagerImpl()
 	{
 		contactsFile = new File("myFile.txt");
+		//date = new GregorianCalendar();
 	}
+
+	 public List<Meeting> getMeetingList()
+	 {
+	 	return(meetingList);
+	 }
+
 
 /**
 * Add a new meeting to be held in the future.
@@ -62,7 +72,16 @@ FutureMeeting getFutureMeeting(int id)
 */
 Meeting getMeeting(int id)
 {
-	return null;
+	Meeting requestedMeeting = null;
+	for (Meeting meeting : getMeetingList())
+	{
+		if (meeting.getId() == id)
+		{
+			requestedMeeting = meeting;
+			break;
+		}
+	}
+	return(requestedMeeting);
 }
 /**
 * Returns the list of future meetings scheduled with this contact.
