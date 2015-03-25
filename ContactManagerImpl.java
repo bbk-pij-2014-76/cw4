@@ -14,6 +14,11 @@ public class  ContactManagerImpl
 {
 	private Set<Contact> contactList;
 	private int id;
+	public ContactManagerImpl()
+	{
+		contactsFile = new File("myFile.txt");
+	}
+
 /**
 * Add a new meeting to be held in the future.
 *
