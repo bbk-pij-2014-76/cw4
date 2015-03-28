@@ -63,9 +63,16 @@ public class ContactManagerImplTest
 	@Test
 	public void testPastMeeting()
 	{
-		assertEquals(2, contactManager.getPastMeeting(2).getId());
+		assertEquals(2, contactManager.getPastMeeting(5).getId());
 		assertEquals("Here are the past meeting notes", contactManager.getPastMeeting(2).getNotes());
-		assertNull(contactManager.getPastMeeting(9999));
+		assertNull(contactManager.getPastMeeting(9976));
+	}
+	@Test
+	public void testPastMeetingList()
+	{
+		contactManager.addNewPastMeeting(contactList, new GregorianCalendar(2013,12,12), "checking my notes");
+		List<PastMeeting> pastMeetings = contactManager.getPastMeetingList(contact3);
+		assertTrue(!pastMeetings.isEmpty());
 	}
 
 
