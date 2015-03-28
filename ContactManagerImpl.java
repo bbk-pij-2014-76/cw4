@@ -13,6 +13,7 @@ import java.io.*;
 public class  ContactManagerImpl
 {
 	private Set<Contact> contactList;
+	private ObjectInputStream dataStream;
 	private int id;
 	private File contactsFile;
 	private Calendar date;
@@ -266,7 +267,19 @@ Set<Contact> getContacts(int... ids)
 */
 Set<Contact> getContacts(String name)
 {
-	return null;
+	if(name == null)
+	{
+		throw new NullPointerException("Argument \"name\" cannot be null.");
+	}
+	Set<Contact> updatedContactList = new HashSet<>();
+	for(Contact contact : contactList)
+	{
+		if(contact.getName().equals(name))
+		{
+			updatedContactList.add(contact);
+		}
+	}
+	return updatedContactList;
 }
 /**
 * Save all data to disk.
@@ -276,6 +289,16 @@ Set<Contact> getContacts(String name)
 */
 void flush()
 {
-
+	try
+	{
+		if (dataStream != null)
+		{
+			dataStream.close();
+		}
+	} catch (IOException e)
+	{
+		e.printStackTrace();
+	}
 }
+
 }
