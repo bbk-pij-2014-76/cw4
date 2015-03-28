@@ -16,6 +16,8 @@ public class  ContactManagerImpl
 	private int id;
 	private File contactsFile;
 	private Calendar date;
+	private List<PastMeeting> pastMeetingList;
+	private List<Meeting> futureMeetingList;
 	private List<Meeting> meetingList;
 	public ContactManagerImpl()
 	{
@@ -152,7 +154,21 @@ List<PastMeeting> getPastMeetingList(Contact contact)
 */
 void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text)
 {
-
+	FutureMeeting result = null;
+	for (PastMeeting pm: pastMeetingList)
+	{
+		if (pm.getId() == id)
+		{
+			throw new IllegalArgumentException();
+		}
+	}
+	for (Meeting fm: futureMeetingList)
+	{
+		if (fm.getId()==id)
+		{
+			result = (FutureMeeting) fm;
+		}
+	}
 }
 /**
 * Add notes to a meeting.
@@ -168,9 +184,40 @@ void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text)
 * @throws IllegalStateException if the meeting is set for a date in the future
 * @throws NullPointerException if the notes are null
 */
-void addMeetingNotes(int id, String text)
+void addMeetingNotes(int id, String notes)
 {
-
+	if(notes == null)
+	{
+		throw new NullPointerException(" no notes were entered");
+	}
+	Meeting m=null;
+	boolean meetingFound = false;
+	for(Meeting meeting: meetingList)
+	{
+		if(meeting.getId() == id )
+		{
+			m = meeting;
+			meetingFound = true;
+			break;
+		}
+	}
+		if(meetingFound)
+		{
+			if( m.getDate().after(Calendar.getInstance()))
+			{
+				throw new IllegalStateException("This meeting will take place on  a future date.");
+			}
+			String t = "";
+			if(m instanceof PastMeetingImpl)
+			{
+				t = ((PastMeetingImpl)m).getNotes();
+			}
+			PastMeetingImpl pastMeeting = new PastMeetingImpl(m.getId(),m.getContacts(), m.getDate(), notes);
+			}
+		else
+		{
+			throw new IllegalArgumentException("Invalid meeting ID: " + id);
+		}
 }
 /**
 * Create a new contact with the specified name and notes.
@@ -193,7 +240,23 @@ void addNewContact(String name, String notes)
 */
 Set<Contact> getContacts(int... ids)
 {
-	return null;
+	Set<Contact> updatedContactList = new HashSet<>();
+	boolean contactFound = false;
+		for( int id: ids)
+		{
+			contactFound = false;
+			for(Contact contact : contactList)
+			{
+				if(contact.getId() == id)
+				{
+					updatedContactList.add(contact);
+					contactFound = true;
+					break;
+				}
+			}
+			if(!contactFound)	throw new IllegalArgumentException("We have an invalid contact ID: " + id);
+		}
+		return updatedContactList;
 }
 /**
 * Returns a list with the contacts whose name contains that string.
